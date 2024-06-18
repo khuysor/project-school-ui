@@ -3,7 +3,7 @@ import type { InputRef, TableColumnsType, TableColumnType } from "antd";
 import { Button, Flex, Input, Space, Table, Tooltip } from "antd";
 import type { FilterDropdownProps } from "antd/es/table/interface";
 import Highlighter from "react-highlight-words";
-import { StudentType } from "../util/student";
+import { StudentType } from "../../util/student";
 import { useState, useRef } from "react";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import ModalConfirm from "./ModalDeleteStudent";

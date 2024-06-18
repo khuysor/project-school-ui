@@ -1,5 +1,53 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: "Open Sans";
+  src: url("./assets/font/Open_Sans/OpenSans-Italic-VariableFont_wdth,wght.ttf")
+    format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Sans";
+  src: url("./assets/font/Open_Sans/OpenSans-VariableFont_wdth\,wght.ttf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: "Snas", sans-serif;
+}
+.body {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  background-color: #301dad;
+}
+.body > .left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.body > .right {
+  background-color: #1677ff;
+  clip-path: circle(70% at 93% 50%);
+  flex: 7;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.body > .right > .login {
+  width: 500px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

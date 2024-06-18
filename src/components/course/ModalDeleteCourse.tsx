@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { Button, Flex, Modal, Space, message } from 'antd';
+import { Flex, Modal, message } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons'
 import axios from 'axios';
-import { urlStu } from '../util/student';
+import { courseUrl } from '../../util/course'
 interface Prop {
     close: () => void
     open: boolean
@@ -12,25 +11,25 @@ interface Prop {
 
 }
 
-const ModalDeleteStudent = ({ close, open, id, name, ondelete }: Prop) => {
-    const url = urlStu + `/${id}`;
-    const deleteStudent = () => {
-        axios.delete(`${url}`).then(() => { success(), close(); ondelete(id) }).catch((e) => console.log(e))
+const ModalDeleteCourse = ({ close, open, id, name, ondelete }: Prop) => {
 
-    }
+
     const success = () => {
         messageApi.open({
             type: 'success',
             content: 'This is a success message',
         });
     };
+    const deleteData = () => {
+        axios.delete(courseUrl + `/${id}`).then(() => { success(), ondelete(id) }).catch();
+    }
     const [messageApi, contextHolder] = message.useMessage();
     return (
         <>
             <Modal
                 open={open}
-                onOk={deleteStudent}
                 onCancel={close}
+                onOk={deleteData}
                 title={
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                         <InfoCircleOutlined style={{ color: 'red' }} />
@@ -48,4 +47,4 @@ const ModalDeleteStudent = ({ close, open, id, name, ondelete }: Prop) => {
     );
 };
 
-export default ModalDeleteStudent;
+export default ModalDeleteCourse;

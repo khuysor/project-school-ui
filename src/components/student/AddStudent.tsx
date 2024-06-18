@@ -1,6 +1,6 @@
 import { Button, Flex, Form, Modal, Select, message } from "antd";
 import Input from "antd/es/input/Input";
-import { StudentType, urlStu } from "../util/student";
+import { StudentType, urlStu } from "../../util/student";
 
 import TextArea from "antd/es/input/TextArea";
 

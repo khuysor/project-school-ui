@@ -5,9 +5,10 @@ import type { FilterDropdownProps } from "antd/es/table/interface";
 import Highlighter from "react-highlight-words";
 import { useState, useRef } from "react";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import ModalDeleteStudent from "./ModalDeleteStudent";
-import { CategoryType } from "../util/category";
-import { convertUTCDateToString } from "../util/helper";
+
+import { CategoryType } from "../../util/category";
+import { convertUTCDateToString } from "../../util/helper";
+import ModalDeleteCategory from "./ModalDeleteCategory";
 
 interface Prop {
     categoryData: CategoryType[];
@@ -139,11 +140,11 @@ const TableCategory = ({ categoryData, onDelete }: Prop) => {
             width: 100,
             sortDirections: ["descend", "ascend"],
             render: (dataIndex) => dataIndex,
-            sorter: (a, b) => b.index - a.index,
+            sorter: (a, b) => a.index - b.index,
             fixed: 'left'
         },
 
-       
+
         {
             title: "Code",
             dataIndex: "code",
@@ -151,7 +152,7 @@ const TableCategory = ({ categoryData, onDelete }: Prop) => {
             ...getColumnSearchProps("code"),
             sorter: (a, b) => a.code.length - b.code.length,
             sortDirections: ["descend", "ascend"],
-            
+
         },
         {
             title: "Subject Name",
@@ -212,7 +213,7 @@ const TableCategory = ({ categoryData, onDelete }: Prop) => {
             <Table
 
                 columns={columns}
-                dataSource={displayedData.map((student, index) => ({
+                dataSource={categoryData.map((student, index) => ({
                     ...student,
                     index: index + 1, // Add the index starting from 1 (optional)
                 }))}
@@ -233,7 +234,7 @@ const TableCategory = ({ categoryData, onDelete }: Prop) => {
 
                 size={'small'}
             />
-            <ModalDeleteStudent ondelete={(id) => onDelete(id)} close={() => setOpen(false)} open={open} name={selectedStudent.name} id={selectedStudent.id} />
+            <ModalDeleteCategory ondelete={(id) => onDelete(id)} close={() => setOpen(false)} open={open} name={selectedStudent.name} id={selectedStudent.id} />
         </>
     );
 };

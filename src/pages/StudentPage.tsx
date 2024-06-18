@@ -1,11 +1,11 @@
 import { Flex } from "antd";
 import Button from "antd/es/button";
-import TableStudent from "../components/TableStudent";
+import TableStudent from "../components/student/TableStudent";
 import { StudentType, urlStu } from "../util/student";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import AddStudent from "../components/AddStudent";
+import AddStudent from "../components/student/AddStudent";
 
 const StudentPage = () => {
 
@@ -31,7 +31,7 @@ const StudentPage = () => {
     };
 
     return (
-        <div style={{ width: "100%", height: "100%" ,overflow:"hidden"  }}>
+        <div style={{ width: "100%", height: "100%", overflow: "hidden" }}>
             <Flex
                 justify="space-between"
                 style={{ position: "sticky", top: 0, zIndex: 10, marginBottom: 10 }}

@@ -1,15 +1,22 @@
-import { theme, Button, Dropdown, Avatar } from "antd";
+import { theme, Button, Dropdown, Avatar, List } from "antd";
 import { Header } from "antd/es/layout/layout";
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 interface Prop {
   collapsed: boolean;
   setCollapsed: () => void;
 }
 const Navbar = ({ collapsed, setCollapsed }: Prop) => {
+  const nav = useNavigate()
+  const logout = () => {
+
+    sessionStorage.removeItem("auth");
+    nav('/login')
+  };
   const items = [
     {
       key: 1,
@@ -17,12 +24,14 @@ const Navbar = ({ collapsed, setCollapsed }: Prop) => {
     },
     {
       key: 2,
-      label: "Sign out",
+      label: <List.Item onClick={logout}>Logout</List.Item>,
     },
   ];
   const {
-    token: { colorBgContainer, borderRadiusLG },
+    token: { colorBgContainer },
   } = theme.useToken();
+
+
   return (
     <Header
       style={{

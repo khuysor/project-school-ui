@@ -1,4 +1,6 @@
-export const convertUTCDateToString= (utcDateString: string) => {
+export const convertUTCDateToString = (utcDateString: string | null) => {
+    if (!utcDateString) return ''; // Return empty string if utcDateString is null or undefined
+
     const utcDateWithoutMilliseconds = utcDateString.split('.')[0];
     const date = new Date(utcDateWithoutMilliseconds);
     const options = {
@@ -11,5 +13,4 @@ export const convertUTCDateToString= (utcDateString: string) => {
         timeZone: "Asia/Phnom_Penh", // Set to Khmer time zone
     };
     return date.toLocaleString("en-KH", options).replace(/(\d+)\/(\d+)\/(\d+), (\d+):(\d+):(\d+)/, '$3-$1-$2 $4:$5:$6');
-
 };

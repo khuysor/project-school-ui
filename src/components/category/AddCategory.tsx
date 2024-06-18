@@ -1,6 +1,6 @@
 import { Button, Flex, Form, Input, Modal, message } from "antd";
 import { useForm } from "antd/es/form/Form";
-import { CategoryType } from "../util/category";
+import { CategoryType } from "../../util/category";
 import { useState } from "react";
 import { ThunderboltOutlined } from "@ant-design/icons";
 import axios from "axios";
