@@ -4,15 +4,15 @@ import axios from "axios";
 import TableCourse from "../components/course/TableCourse";
 import { Flex, Button } from "antd";
 import AddCourse from "../components/course/AddCourse";
-import { getTokenFromSessionStorage } from "../util/auth";
+import { getTokenFromStorage } from "../util/auth";
 
 const CoursePage = () => {
   const [data, setData] = useState<Course[]>([]);
 
   useEffect(() => {
-    axios.get(courseUrl,{
-      headers:{
-        Authorization:'Bearer '+getTokenFromSessionStorage()
+    axios.get(courseUrl, {
+      headers: {
+        Authorization: 'Bearer ' + getTokenFromStorage()
       }
     }).then((res) => setData(res.data)).catch();
   }, []);

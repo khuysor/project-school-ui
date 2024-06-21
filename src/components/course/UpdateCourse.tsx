@@ -5,7 +5,7 @@ import { Course, CourseUpdate, courseUrl } from '../../util/course';
 import axios from "axios";
 import { CategoryType, categoryUrl } from "../../util/category";
 import { UploadFile } from 'antd/es/upload/interface';
-import { getTokenFromSessionStorage } from "../../util/auth";
+import { getTokenFromStorage } from "../../util/auth";
 
 interface Prop {
     open: boolean;
@@ -21,7 +21,7 @@ const UpdateCourse = ({ open, close, formData, id, course }: Prop) => {
     const [fileList, setFileList] = useState<UploadFile[]>([]); // State for file list
 
     useEffect(() => {
-        axios.get(categoryUrl)
+        axios.get(categoryUrl, { headers: { Authorization: 'Bearer ' + getTokenFromStorage() } })
             .then((res) => {
                 setCategory(res.data);
             })
@@ -89,7 +89,7 @@ const UpdateCourse = ({ open, close, formData, id, course }: Prop) => {
 
         newFormData.append('course', new Blob([JSON.stringify(data)], { type: 'application/json' }));
 
-        axios.put(`${courseUrl}/${id}`, newFormData, { headers: { Authorization: 'Bearer ' + getTokenFromSessionStorage() } })
+        axios.put(`${courseUrl}/${id}`, newFormData, { headers: { Authorization: 'Bearer ' + getTokenFromStorage() } })
             .then((res) => {
                 success();
                 formData(res.data);

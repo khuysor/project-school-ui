@@ -4,6 +4,7 @@ import { CategoryType } from "../../util/category";
 import { useState } from "react";
 import { ThunderboltOutlined } from "@ant-design/icons";
 import axios from "axios";
+import { getTokenFromStorage } from "../../util/auth";
 interface Prop {
     open: boolean;
     close: () => void;
@@ -28,7 +29,7 @@ const AddCategory = ({ open, close, formData }: Prop) => {
             name: value.name
         }
 
-        await axios.post('http://localhost:8080/api/category', newCategory).then((res) => formData(res.data)).catch((e) => console.log(e));
+        await axios.post('http://localhost:8080/api/category', newCategory, { headers: { Authorization: 'Bearer ' + getTokenFromStorage() } }).then((res) => formData(res.data)).catch((e) => console.log(e));
         success()
         setCode('')
         form.resetFields();

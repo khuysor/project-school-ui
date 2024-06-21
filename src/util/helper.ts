@@ -1,3 +1,5 @@
+import { Breadcrumb, BreadcrumbProps } from "antd";
+
 export const convertUTCDateToString = (utcDateString: string | null) => {
     if (!utcDateString) return ''; // Return empty string if utcDateString is null or undefined
 
@@ -14,3 +16,13 @@ export const convertUTCDateToString = (utcDateString: string | null) => {
     };
     return date.toLocaleString("en-KH", options).replace(/(\d+)\/(\d+)\/(\d+), (\d+):(\d+):(\d+)/, '$3-$1-$2 $4:$5:$6');
 };
+export interface BasePageContainerProps {
+    title?: string;
+    subTitle?: string;
+    breadcrumb?: Partial<BreadcrumbProps> | React.ReactElement<typeof Breadcrumb>;
+    extra?: React.ReactNode;
+    loading?: boolean;
+    children: React.ReactNode;
+    transparent?: boolean;
+  }
+  

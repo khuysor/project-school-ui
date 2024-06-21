@@ -1,10 +1,10 @@
 import axios from "axios";
 
 export const createSession = (token: string) => {
-  sessionStorage.setItem("auth", token);
+  localStorage.setItem("auth", token);
 };
-export const getTokenFromSessionStorage = () => {
-  return sessionStorage.getItem("auth");
+export const getTokenFromStorage = () => {
+  return localStorage.getItem("auth");
 };
 export const decodeToken = (token: any) => {
   const base64Url = token.split(".")[1];

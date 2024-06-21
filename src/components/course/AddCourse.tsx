@@ -6,6 +6,7 @@ import axios from "axios";
 import { CategoryType, categoryUrl } from "../../util/category";
 import { PlusOutlined } from '@ant-design/icons';
 import { UploadChangeParam, UploadFile, UploadProps } from "antd/es/upload";
+import { getTokenFromStorage } from "../../util/auth";
 
 interface Prop {
     open: boolean;
@@ -25,12 +26,12 @@ const AddCourse = ({ open, close, formData }: Prop) => {
     const [messageApi, contextHolder] = message.useMessage();
 
     useEffect(() => {
-        axios.get(categoryUrl)
+        axios.get(categoryUrl, { headers: { Authorization: 'Bearer ' + getTokenFromStorage() } })
             .then((res) => {
                 setCategory(res.data);
                 success();
             })
-            .catch((e) => console.log(e));    
+            .catch((e) => console.log(e));
     }, []);
 
     const handleCancel = () => {
@@ -72,7 +73,7 @@ const AddCourse = ({ open, close, formData }: Prop) => {
         }
         newFormData.append('course', new Blob([JSON.stringify(data)], { type: 'application/json' }));
 
-        axios.post(courseUrl, newFormData)
+        axios.post(courseUrl, newFormData, { headers: { Authorization: 'Bearer ' + getTokenFromStorage() } })
             .then((res) => {
                 success();
                 formData(res.data);

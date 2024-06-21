@@ -1,53 +1,65 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-@font-face {
-  font-family: "Open Sans";
-  src: url("./assets/font/Open_Sans/OpenSans-Italic-VariableFont_wdth,wght.ttf")
-    format("truetype");
-  font-weight: normal;
-  font-style: italic;
-}
-@font-face {
-  font-family: "Sans";
-  src: url("./assets/font/Open_Sans/OpenSans-VariableFont_wdth\,wght.ttf")
-    format("truetype");
-  font-weight: normal;
-  font-style: normal;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
 
-body {
-  font-family: "Snas", sans-serif;
+.fade-in {
+  opacity: 1;
+  animation-name: fadeIn;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 1s;
 }
-.body {
-  display: flex;
-  height: 100vh;
-  width: 100%;
-  position: relative;
-  background-color: #301dad;
+
+.icon-spin {
+  -webkit-animation: icon-spin 1s infinite linear;
+  animation: icon-spin 1s infinite linear;
 }
-.body > .left {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
-.body > .right {
-  background-color: #1677ff;
-  clip-path: circle(70% at 93% 50%);
-  flex: 7;
-  height: 100%;
-  display: flex;
-  justify-content: end;
-  align-items: center;
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
-.body > .right > .login {
-  width: 500px;
-  height: 500px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+@-webkit-keyframes icon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+@keyframes icon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
 }

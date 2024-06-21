@@ -13,8 +13,7 @@ interface Prop {
 const Navbar = ({ collapsed, setCollapsed }: Prop) => {
   const nav = useNavigate()
   const logout = () => {
-
-    sessionStorage.removeItem("auth");
+    localStorage.removeItem("auth");
     nav('/login')
   };
   const items = [

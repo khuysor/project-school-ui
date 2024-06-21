@@ -152,6 +152,7 @@ const TableCategory = ({ categoryData, onDelete }: Prop) => {
             ...getColumnSearchProps("code"),
             sorter: (a, b) => a.code.length - b.code.length,
             sortDirections: ["descend", "ascend"],
+            render: (_, data) => <span className=" text-blue-800" onClick={() => alert(data.id)}>{data.code}</span>
 
         },
         {
