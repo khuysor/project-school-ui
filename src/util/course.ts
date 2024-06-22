@@ -1,4 +1,4 @@
-import { CategoryType } from "./category";
+import { CategoryType } from "./class";
 
 export interface Course {
   id: number;

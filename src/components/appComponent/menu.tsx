@@ -13,44 +13,43 @@ export const sidebar = [
     path: routes.dashboard,
     key: routes.dashboard,
     name: "Dashboard",
-    icon: <MdOutlineHome />
+    icon: <MdOutlineHome />,
   },
 
   {
     path: routes.student,
     key: routes.student,
     name: "Students",
-    icon: < PiStudentDuotone />
+    icon: <PiStudentDuotone />,
   },
   {
     path: routes.category,
     key: routes.category,
-    name: "Subjects",
-    icon: < FolderOpenOutlined />
+    name: "Class",
+    icon: <FolderOpenOutlined />,
   },
   {
     path: routes.course,
     key: routes.course,
     name: "Course",
-    icon: <MdMenuBook  />
+    icon: <MdMenuBook />,
   },
   {
     path: routes.register,
     key: routes.register,
     name: "Student Registration",
-    icon: <FaRegIdCard />
+    icon: <FaRegIdCard />,
   },
   {
-    path: routes.setting,
-    key: routes.setting,
+    path: routes.staff,
+    key: routes.staff,
     name: "Staff",
-    icon: <TeamOutlined />
+    icon: <TeamOutlined />,
   },
   {
     path: routes.setting,
     key: routes.setting,
     name: "Setting",
-    icon: <SettingOutlined />
-  }
-
+    icon: <SettingOutlined />,
+  },
 ];

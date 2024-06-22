@@ -29,6 +29,10 @@ const LayoutComponent = () => {
 
   const location = useLocation();
   const nav = useNavigate();
+  const logout = () => {
+    localStorage.removeItem("auth");
+    nav(routes.home);
+  };
   return (
     <div className="h-screen">
       <ProLayout
@@ -76,6 +80,7 @@ const LayoutComponent = () => {
                       key: "logout",
                       icon: <LogoutOutlined />,
                       label: "Logout",
+                      onClick: () => logout(),
                     },
                   ],
                 }}
