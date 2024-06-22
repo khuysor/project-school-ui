@@ -5,7 +5,7 @@ import { Course, CourseUpdate, courseUrl } from "../../util/course";
 import axios from "axios";
 import { UploadFile } from "antd/es/upload/interface";
 import { getTokenFromStorage } from "../../util/auth";
-import { classType } from "../../util/class";
+import { classApi, classType } from "../../util/class";
 
 interface Prop {
   open: boolean;
@@ -17,9 +17,18 @@ interface Prop {
 
 const UpdateCourse = ({ open, close, formData, id, course }: Prop) => {
   const [form] = useForm<Course>(); // Generic type for form data
-  const [category, setCategory] = useState<classType[]>([]);
+  const [classed, setClass] = useState<classType[]>([]);
   const [fileList, setFileList] = useState<UploadFile[]>([]); // State for file list
-
+  useEffect(() => {
+    axios
+      .get(classApi, {
+        headers: {
+          Authorization: `Bearer ${getTokenFromStorage()}`,
+        },
+      })
+      .then((res) => setClass(res.data))
+      .catch((e) => console.log(e));
+  }, []);
   useEffect(() => {
     if (course.imgUrl) {
       setFileList([
@@ -36,7 +45,6 @@ const UpdateCourse = ({ open, close, formData, id, course }: Prop) => {
 
   const handleCancel = () => {
     form.resetFields();
-    setFileList([]);
     close();
   };
 
@@ -80,8 +88,6 @@ const UpdateCourse = ({ open, close, formData, id, course }: Prop) => {
         }
       }
     }
-    console.log(fileList);
-
     newFormData.append(
       "course",
       new Blob([JSON.stringify(data)], { type: "application/json" })
@@ -172,14 +178,14 @@ const UpdateCourse = ({ open, close, formData, id, course }: Prop) => {
         </Form.Item>
         <Form.Item
           labelAlign="left"
-          label="Category"
+          label="Class"
           name="cateId"
           hasFeedback
           initialValue={course.cateId}
-          rules={[{ required: true, message: "Please select a category" }]}
+          rules={[{ required: true, message: "Please select a class" }]}
         >
           <Select>
-            {category.map((ct, index) => (
+            {classed.map((ct, index) => (
               <Select.Option key={index} value={ct.id}>
                 {ct.name}
               </Select.Option>

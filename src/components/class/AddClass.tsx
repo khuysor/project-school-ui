@@ -1,6 +1,6 @@
 import { Button, Flex, Form, Input, Modal, message } from "antd";
 import { useForm } from "antd/es/form/Form";
-import { classType } from "../../util/class";
+import { classApi, classType } from "../../util/class";
 import { useState } from "react";
 import { ThunderboltOutlined } from "@ant-design/icons";
 import axios from "axios";
@@ -35,10 +35,12 @@ const AddClass = ({ open, close, formData }: Prop) => {
     };
 
     await axios
-      .post("http://localhost:8080/api/category", newCategory, {
+      .post(classApi, newCategory, {
         headers: { Authorization: "Bearer " + getTokenFromStorage() },
       })
-      .then((res) => formData(res.data))
+      .then((res) => {
+        formData(res.data), console.log(res.data);
+      })
       .catch((e) => console.log(e));
     success();
     setCode("");
