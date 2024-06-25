@@ -4,19 +4,19 @@ import axios from "axios";
 import TableCourse from "../components/course/TableCourse";
 import { Flex, Button, BreadcrumbProps } from "antd";
 import AddCourse from "../components/course/AddCourse";
-import { getTokenFromStorage } from "../util/auth";
+import { getAuth } from "../util/auth";
 import Container from "../components/PageContainer";
 import { routes } from "../routes/routes";
 import { Link } from "react-router-dom";
 
 const CoursePage = () => {
   const [data, setData] = useState<Course[]>([]);
-
+  const token=getAuth()
   useEffect(() => {
     axios
       .get(courseUrl, {
         headers: {
-          Authorization: "Bearer " + getTokenFromStorage(),
+          Authorization: "Bearer " +token.token ,
         },
       })
       .then((res) => setData(res.data))

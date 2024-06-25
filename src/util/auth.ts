@@ -1,10 +1,59 @@
 import axios from "axios";
-
-export const createSession = (token: string) => {
-  localStorage.setItem("auth", token);
+export interface Authed {
+  firstname: string | null;
+  lastname: string | null;
+  username: string | null;
+  role: string | null;
+  token: string | null;
+}
+export const createSession = (auth: Authed) => {
+  const authed: Authed = {
+    username: auth.username,
+    firstname: auth.firstname,
+    lastname: auth.lastname,
+    role: auth.role,
+    token: auth.token,
+  };
+  const authedString = JSON.stringify(authed);
+  localStorage.setItem("auth", authedString);
 };
-export const getTokenFromStorage = () => {
-  return localStorage.getItem("auth");
+const isSessionTokenValid = (): boolean => {
+  const token = getAuth();
+  if (!token) {
+    return false; // No token found, consider user as not logged in
+  }
+
+  try {
+    if (token != null) {
+      const { exp } = JSON.parse(atob( token.token.split(".")[1]));
+      return exp * 1000 < Date.now();
+    }
+    // Check if expiration time is in the future
+  } catch (error) {
+    console.error("Error parsing or verifying token:", error);
+    return false;
+  }
+};
+export const deleteToken = () => {
+  if (isSessionTokenValid()) {
+    localStorage.removeItem("auth");
+    return true;
+  }
+  return false;
+};
+
+export const getAuth = () => {
+  const storage = localStorage.getItem("auth");
+  const auth: Authed | null = storage != null ? JSON.parse(storage) : null;
+  if (!auth) return false;
+
+  const user = {
+    user: auth.username,
+    role: auth.role,
+    token: auth.token,
+  };
+
+  return user;
 };
 export const decodeToken = (token: any) => {
   const base64Url = token.split(".")[1];

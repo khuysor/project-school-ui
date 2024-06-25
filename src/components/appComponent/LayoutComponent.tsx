@@ -39,9 +39,9 @@ const LayoutComponent = () => {
         {...items}
         token={{
           sider: {
-            colorMenuBackground: "#fff",
-            colorBgMenuItemSelected: "red",
-            colorTextMenuSelected: "white",
+            colorBgMenuItemSelected: "#87e8de",
+            colorBgMenuItemHover: "#87e8de",
+            colorMenuBackground: "white",
           },
         }}
         layout={LayoutType.MIX}

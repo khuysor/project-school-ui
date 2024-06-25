@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import TableClass from "../components/class/TableClass";
 import { classApi, classType } from "../util/class";
 import axios from "axios";
-import { getTokenFromStorage } from "../util/auth";
+import { getAuth } from "../util/auth";
 import { routes } from "../routes/routes";
 import { Link } from "react-router-dom";
 import Container from "../components/PageContainer";
@@ -24,16 +24,18 @@ function ClassPage() {
   const [active, setActive] = useState(false);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<classType[]>([]);
-  const token = getTokenFromStorage();
+  const token = getAuth();
   useEffect(() => {
     setLoading(true);
     axios
       .get(classApi, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token.token}`,
         },
       })
-      .then((res) =>{ setData(res.data),setLoading(false)})
+      .then((res) => {
+        setData(res.data), setLoading(false);
+      })
       .catch(() => setLoading(false));
   }, []);
   return (

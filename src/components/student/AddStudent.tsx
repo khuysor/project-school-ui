@@ -6,6 +6,7 @@ import TextArea from "antd/es/input/TextArea";
 
 import { useForm } from "antd/es/form/Form";
 import axios from "axios";
+import { getAuth } from "../../util/auth";
 
 interface Prop {
     open: boolean;
@@ -29,8 +30,10 @@ const AddStudent = ({ open, close, formData }: Prop) => {
             phone: data.phone,
             address: data.address
         };
-
-        axios.post(urlStu, newStudent).then((res) => formData(res.data)).catch((e) => console.log(e))
+        const token = getAuth();
+        axios.post(urlStu, newStudent,{headers:{
+            Authorization:`Bearer ${token.token}`
+        }}).then((res) =>{ formData(res.data)}).catch((e) => console.log(e))
         success()
     }
     const [messageApi, contextHolder] = message.useMessage();

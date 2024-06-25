@@ -4,7 +4,7 @@ import { classApi, classType } from "../../util/class";
 import { useState } from "react";
 import { ThunderboltOutlined } from "@ant-design/icons";
 import axios from "axios";
-import { getTokenFromStorage } from "../../util/auth";
+import { getAuth } from "../../util/auth";
 import {
   ProForm,
   ProFormText,
@@ -36,7 +36,7 @@ const AddClass = ({ open, close, formData }: Prop) => {
 
     await axios
       .post(classApi, newCategory, {
-        headers: { Authorization: "Bearer " + getTokenFromStorage() },
+        headers: { Authorization: "Bearer " + getAuth() },
       })
       .then((res) => {
         formData(res.data), console.log(res.data);

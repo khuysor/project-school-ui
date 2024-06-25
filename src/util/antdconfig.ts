@@ -4,7 +4,7 @@ import { ConfigProviderProps } from "antd";
 export const antdConfig: ConfigProviderProps = {
   theme: {
     token: {
-      colorPrimary: "#818cf8",
+      colorPrimary: "#1677ff",
     },
     components: {
       Table: {

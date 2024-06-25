@@ -17,8 +17,8 @@ import axios from "axios";
 
 import { PlusOutlined } from "@ant-design/icons";
 import { UploadChangeParam, UploadFile, UploadProps } from "antd/es/upload";
-import { getTokenFromStorage } from "../../util/auth";
-import { classType } from "../../util/class";
+import { getAuth } from "../../util/auth";
+import { classApi, classType } from "../../util/class";
 
 interface Prop {
   open: boolean;
@@ -31,18 +31,22 @@ type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 const AddCourse = ({ open, close, formData }: Prop) => {
   const [form] = useForm<Course>();
   const [code, setCode] = useState("");
-  const [category, setCategory] = useState<classType[]>([]);
+  const [classed, setClass] = useState<classType[]>([]);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [previewImage, setPreviewImage] = useState("");
   const [previewOpen, setPreviewOpen] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
-
-
-
+  const token = getAuth();
   const handleCancel = () => {
     form.resetFields();
     close();
   };
+  useEffect(() => {
+    axios
+      .get(classApi, { headers: { Authorization: `Bearer ${token.token}` } })
+      .then((res) => setClass(res.data))
+      .catch((e) => console.log(e));
+  }, []);
 
   const success = () => {
     messageApi.open({
@@ -83,7 +87,7 @@ const AddCourse = ({ open, close, formData }: Prop) => {
 
     axios
       .post(courseUrl, newFormData, {
-        headers: { Authorization: "Bearer " + getTokenFromStorage() },
+        headers: { Authorization: "Bearer " + token.token },
       })
       .then((res) => {
         success();
@@ -110,12 +114,7 @@ const AddCourse = ({ open, close, formData }: Prop) => {
   };
 
   return (
-    <Modal
-      title="New Category"
-      onCancel={handleCancel}
-      open={open}
-      footer={null}
-    >
+    <Modal title="New Course" onCancel={handleCancel} open={open} footer={null}>
       {contextHolder}
       <Form
         onFinish={(value) => {
@@ -188,13 +187,13 @@ const AddCourse = ({ open, close, formData }: Prop) => {
         </Form.Item>
         <Form.Item
           labelAlign="left"
-          label="Category"
+          label="Class"
           name="cateId"
           hasFeedback
-          rules={[{ required: true, message: "Please select a category" }]}
+          rules={[{ required: true, message: "Please select a class" }]}
         >
           <Select>
-            {category.map((ct, index) => (
+            {classed.map((ct, index) => (
               <Select.Option key={index} value={ct.id}>
                 {ct.name}
               </Select.Option>

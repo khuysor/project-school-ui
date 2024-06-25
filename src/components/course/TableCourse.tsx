@@ -12,7 +12,6 @@ import { convertUTCDateToString } from "../../util/helper";
 import { Course, CourseUpdate } from "../../util/course";
 import ModalDeleteCourse from "./ModalDeleteCourse";
 import UpdateCourse from "./UpdateCourse";
-import logo from "../../assets/course.jpeg";
 
 interface Prop {
   courseData: Course[];

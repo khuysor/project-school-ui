@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Course, CourseUpdate, courseUrl } from "../../util/course";
 import axios from "axios";
 import { UploadFile } from "antd/es/upload/interface";
-import { getTokenFromStorage } from "../../util/auth";
+import { getAuth } from "../../util/auth";
 import { classApi, classType } from "../../util/class";
 
 interface Prop {
@@ -23,7 +23,7 @@ const UpdateCourse = ({ open, close, formData, id, course }: Prop) => {
     axios
       .get(classApi, {
         headers: {
-          Authorization: `Bearer ${getTokenFromStorage()}`,
+          Authorization: `Bearer ${getAuth()}`,
         },
       })
       .then((res) => setClass(res.data))
@@ -95,7 +95,7 @@ const UpdateCourse = ({ open, close, formData, id, course }: Prop) => {
 
     axios
       .put(`${courseUrl}/${id}`, newFormData, {
-        headers: { Authorization: "Bearer " + getTokenFromStorage() },
+        headers: { Authorization: "Bearer " + getAuth() },
       })
       .then((res) => {
         success();

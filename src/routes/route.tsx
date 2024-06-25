@@ -7,13 +7,16 @@ import ClassPage from "../pages/ClassPage";
 import RegisterPage from "../pages/RegisterPage";
 import CoursePage from "../pages/CoursePage";
 import StudentPage from "../pages/StudentPage";
-import SettingPage from "../pages/SettingPage";
 import Errorpage from "../pages/Errorpage";
 import Login from "../components/auth/login";
 import { routes } from "./routes";
 import Redirect from "./redirect";
 import RequireAuth from "./requireAuth";
+import { getAuth } from "../util/auth";
+import UserPage from "../pages/UserPage";
+import StaffPage from "../pages/StaffPage";
 const errorElement = <Errorpage />;
+const auth = getAuth();
 export const browserRoute = createBrowserRouter([
   {
     path: routes.home,
@@ -59,8 +62,16 @@ export const browserRoute = createBrowserRouter([
         element: <StudentPage />,
       },
       {
+        path: routes.staff,
+        element: <StaffPage />,
+      },
+      {
         path: routes.setting,
-        element: <SettingPage />,
+        element: <UserPage />,
+      },
+      {
+        path: routes.user,
+        element: <UserPage />,
       },
     ],
   },

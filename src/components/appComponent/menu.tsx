@@ -51,5 +51,12 @@ export const sidebar = [
     key: routes.setting,
     name: "Setting",
     icon: <SettingOutlined />,
+    routes: [
+      {
+        path: routes.user,
+        name: "User",
+      },
+    ],
   },
+
 ];
