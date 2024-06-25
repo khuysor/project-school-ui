@@ -4,7 +4,7 @@ import Dashboard from "../pages/Dashboard";
 import Authentication from "../pages/Auth";
 import LayoutComponent from "../components/appComponent/LayoutComponent";
 import ClassPage from "../pages/ClassPage";
-import RegisterPage from "../pages/RegisterPage";
+import RegistertrationPage from "../pages/RegistertrationPage";
 import CoursePage from "../pages/CoursePage";
 import StudentPage from "../pages/StudentPage";
 import Errorpage from "../pages/Errorpage";
@@ -15,6 +15,7 @@ import RequireAuth from "./requireAuth";
 import { getAuth } from "../util/auth";
 import UserPage from "../pages/UserPage";
 import StaffPage from "../pages/StaffPage";
+import Register from "../components/auth/register";
 const errorElement = <Errorpage />;
 const auth = getAuth();
 export const browserRoute = createBrowserRouter([
@@ -30,6 +31,10 @@ export const browserRoute = createBrowserRouter([
       {
         path: routes.login,
         element: <Login />,
+      },
+      {
+        path: routes.userregister,
+        element: <Register />,
       },
     ],
   },
@@ -51,7 +56,7 @@ export const browserRoute = createBrowserRouter([
       },
       {
         path: routes.register,
-        element: <RegisterPage />,
+        element: <RegistertrationPage />,
       },
       {
         path: routes.course,

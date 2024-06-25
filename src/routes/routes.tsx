@@ -5,8 +5,9 @@ export const routes = {
   course: "/course",
   category: "/subject",
   setting: "/#",
-  user:'/users',
+  user: "/users",
   register: "/register",
   staff: "/staff",
   login: "/login",
+  userregister: "/register",
 };

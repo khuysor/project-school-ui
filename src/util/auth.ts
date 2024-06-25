@@ -25,7 +25,7 @@ const isSessionTokenValid = (): boolean => {
 
   try {
     if (token != null) {
-      const { exp } = JSON.parse(atob( token.token.split(".")[1]));
+      const { exp } = JSON.parse(atob(token.token.split(".")[1]));
       return exp * 1000 < Date.now();
     }
     // Check if expiration time is in the future
@@ -68,3 +68,12 @@ export const login = async (username: string, password: string) => {
     password,
   });
 };
+export const registerUrl = "http://localhost:8080/auth/register";
+export interface userRegister {
+  firstname: string;
+  lastname: string;
+  username: string;
+  password: string;
+  token:string,
+  role: string;
+}
