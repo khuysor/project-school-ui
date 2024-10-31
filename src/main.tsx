@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./main.css";
-import { ConfigProvider, ConfigProviderProps } from "antd";
+import { ConfigProvider } from "antd";
 import { antdConfig } from "./util/antdconfig.ts";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
