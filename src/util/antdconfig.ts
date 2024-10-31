@@ -7,11 +7,11 @@ export const antdConfig: ConfigProviderProps = {
       colorPrimary: "#1677ff",
     },
     components: {
-      Table: {
-        headerBg: "#818cf8",
-        headerBorderRadius: 10,
-        headerSortActiveBg: "#a5f3fc",
-      },
+      // Table: {
+      //   headerBg: "#818cf8",
+      //   headerBorderRadius: 10,
+      //   headerSortActiveBg: "#a5f3fc",
+      // },
     },
   },
   locale: enUSIntl,

@@ -1,15 +1,28 @@
 import { Link } from "react-router-dom";
 import Container from "../components/PageContainer";
 import { routes } from "../routes/routes";
-import { Avatar, BreadcrumbProps, Card, Col, List, Progress, Rate, Row, Table, Tag } from "antd";
+import {
+  Avatar,
+  BreadcrumbProps,
+  Card,
+  Col,
+  List,
+  Progress,
+  Rate,
+  Row,
+  Table,
+  Tag,
+} from "antd";
 import { StatisticCard } from "@ant-design/pro-components";
 import { AiOutlineTeam, AiOutlineStar } from "react-icons/ai";
-import { BiPhotoAlbum, BiCommentDetail } from "react-icons/bi";
-import { MdOutlineArticle, MdOutlinePhoto } from "react-icons/md";
+import { BiCommentDetail } from "react-icons/bi";
+import { MdMenuBook } from "react-icons/md";
 import StatCard from "../components/dashboard/startCard";
 import { useState } from "react";
 import LazyImage from "../components/LazyImage";
-
+import useDashboard from "../hook/useDashboard";
+import { IoFolderOpenOutline } from "react-icons/io5";
+import { PiStudentDuotone } from "react-icons/pi";
 
 const breadcrumb: BreadcrumbProps = {
   items: [
@@ -22,11 +35,12 @@ const breadcrumb: BreadcrumbProps = {
 
 const Dashboard = () => {
   const [reviews, setReviews] = useState([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const loading = false;
+  const { countCourse, countCategory, countStudent } = useDashboard();
   return (
-    <Container transparent breadcrumb={breadcrumb} >
+    <Container transparent breadcrumb={breadcrumb}>
       <Row gutter={24}>
-        <Col xl={6} lg={6} md={12} sm={24} xs={24} >
+        <Col xl={6} lg={6} md={12} sm={24} xs={24}>
           <StatCard
             loading={loading}
             icon={<AiOutlineTeam />}
@@ -35,28 +49,34 @@ const Dashboard = () => {
           />
         </Col>
         <Col xl={6} lg={6} md={12} sm={24} xs={24} style={{ marginBottom: 24 }}>
-          <StatCard
-            loading={loading}
-            icon={<MdOutlineArticle />}
-            title="Posts"
-            number={100}
-          />
+          <Link to={routes.course}>
+            <StatCard
+              loading={loading}
+              icon={<MdMenuBook />}
+              title="Courses"
+              number={countCourse}
+            />
+          </Link>
         </Col>
         <Col xl={6} lg={6} md={12} sm={24} xs={24} style={{ marginBottom: 24 }}>
-          <StatCard
-            loading={loading}
-            icon={<BiPhotoAlbum />}
-            title="Albums"
-            number={100}
-          />
+          <Link to={routes.category}>
+            <StatCard
+              loading={loading}
+              icon={<IoFolderOpenOutline />}
+              title="Subjects"
+              number={countCategory}
+            />
+          </Link>
         </Col>
         <Col xl={6} lg={6} md={12} sm={24} xs={24} style={{ marginBottom: 24 }}>
-          <StatCard
-            loading={loading}
-            icon={<MdOutlinePhoto />}
-            title="Photos"
-            number={500}
-          />
+          <Link to={routes.student}>
+            <StatCard
+              loading={loading}
+              icon={<PiStudentDuotone />}
+              title="Students"
+              number={countStudent}
+            />
+          </Link>
         </Col>
         <Col xl={6} lg={6} md={12} sm={24} xs={24} style={{ marginBottom: 24 }}>
           <StatCard
@@ -86,22 +106,22 @@ const Dashboard = () => {
             <StatisticCard.Group direction="row">
               <StatisticCard
                 statistic={{
-                  title: 'XYZ',
+                  title: "XYZ",
                   value: loading ? 0 : 123,
                 }}
               />
               <StatisticCard
                 statistic={{
-                  title: 'Progress',
-                  value: 'ABC',
+                  title: "Progress",
+                  value: "ABC",
                 }}
                 chart={
                   <Progress
                     className="text-primary"
                     percent={loading ? 0 : 75}
                     type="circle"
-                    size={'small'}
-                    strokeColor={'#1890ff'}
+                    size={"small"}
+                    strokeColor={"#1890ff"}
                   />
                 }
                 chartPlacement="left"
@@ -131,7 +151,7 @@ const Dashboard = () => {
                         size="small"
                         src={
                           <LazyImage
-                            src={''}
+                            src={""}
                             placeholder={
                               <div className="bg-gray-100 h-full w-full" />
                             }
@@ -139,8 +159,6 @@ const Dashboard = () => {
                         }
                       />
                     }
-
-
                   />
                 </List.Item>
               )}
@@ -163,28 +181,24 @@ const Dashboard = () => {
               dataSource={reviews}
               columns={[
                 {
-                  title: 'Title',
-                  dataIndex: 'title',
-                  key: 'title',
-                  align: 'left',
+                  title: "Title",
+                  dataIndex: "title",
+                  key: "title",
+                  align: "left",
                 },
                 {
-                  title: 'Year',
-                  dataIndex: 'year',
-                  key: 'year',
-                  align: 'center',
-                  render: (_, row) => (
-                    <Tag color={row}>{row}</Tag>
-                  ),
+                  title: "Year",
+                  dataIndex: "year",
+                  key: "year",
+                  align: "center",
+                  render: (_, row) => <Tag color={row}>{row}</Tag>,
                 },
                 {
-                  title: 'Star',
-                  dataIndex: 'star',
-                  key: 'star',
-                  align: 'center',
-                  render: (_, row) => (
-                    <Rate disabled defaultValue={row} />
-                  ),
+                  title: "Star",
+                  dataIndex: "star",
+                  key: "star",
+                  align: "center",
+                  render: (_, row) => <Rate disabled defaultValue={row} />,
                 },
               ]}
             />
@@ -192,7 +206,7 @@ const Dashboard = () => {
         </Col>
       </Row>
     </Container>
-  )
+  );
 };
 
 export default Dashboard;

@@ -1,9 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
-import Login from "../components/auth/login";
 import { getAuth } from "../util/auth";
 import { routes } from "../routes/routes";
 
-import Register from "../components/auth/register";
 const Authentication = () => {
   if (getAuth()) {
     return <Navigate to={routes.dashboard} replace={true} />;

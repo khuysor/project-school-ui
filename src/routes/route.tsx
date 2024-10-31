@@ -3,21 +3,22 @@ import PageNotFound from "../pages/PageNotFound";
 import Dashboard from "../pages/Dashboard";
 import Authentication from "../pages/Auth";
 import LayoutComponent from "../components/appComponent/LayoutComponent";
-import ClassPage from "../pages/ClassPage";
+
 import RegistertrationPage from "../pages/RegistertrationPage";
-import CoursePage from "../pages/CoursePage";
-import StudentPage from "../pages/StudentPage";
+import CoursePage from "../pages/course-page";
+import StudentPage from "../pages/student-page";
 import Errorpage from "../pages/Errorpage";
 import Login from "../components/auth/login";
 import { routes } from "./routes";
 import Redirect from "./redirect";
 import RequireAuth from "./requireAuth";
-import { getAuth } from "../util/auth";
 import UserPage from "../pages/UserPage";
 import StaffPage from "../pages/StaffPage";
 import Register from "../components/auth/register";
+import CategoryPage from "../pages/category-page";
+
 const errorElement = <Errorpage />;
-const auth = getAuth();
+
 export const browserRoute = createBrowserRouter([
   {
     path: routes.home,
@@ -52,7 +53,7 @@ export const browserRoute = createBrowserRouter([
       },
       {
         path: routes.category,
-        element: <ClassPage />,
+        element: <CategoryPage />,
       },
       {
         path: routes.register,

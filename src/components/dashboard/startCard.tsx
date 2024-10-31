@@ -26,7 +26,7 @@ const StatCard = ({
     const navigate = useNavigate();
 
     const children = (
-        <div style={{ cursor: link ? 'pointer' : 'default' }}>
+        <div className=' cursor-pointer'>
             <span className={`${styles.iconWrapper} text-primary text-opacity-80`}>
                 {icon}
             </span>

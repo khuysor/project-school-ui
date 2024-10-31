@@ -1,11 +1,7 @@
 import axios from "axios";
-export interface Authed {
-  firstname: string | null;
-  lastname: string | null;
-  username: string | null;
-  role: string | null;
-  token: string | null;
-}
+import { Authed } from "../type/authType";
+import { apiLogin } from "../api/backendRoute";
+
 export const createSession = (auth: Authed) => {
   const authed: Authed = {
     username: auth.username,
@@ -17,35 +13,11 @@ export const createSession = (auth: Authed) => {
   const authedString = JSON.stringify(authed);
   localStorage.setItem("auth", authedString);
 };
-const isSessionTokenValid = (): boolean => {
-  const token = getAuth();
-  if (!token) {
-    return false; // No token found, consider user as not logged in
-  }
-
-  try {
-    if (token != null) {
-      const { exp } = JSON.parse(atob(token.token.split(".")[1]));
-      return exp * 1000 < Date.now();
-    }
-    // Check if expiration time is in the future
-  } catch (error) {
-    console.error("Error parsing or verifying token:", error);
-    return false;
-  }
-};
-export const deleteToken = () => {
-  if (isSessionTokenValid()) {
-    localStorage.removeItem("auth");
-    return true;
-  }
-  return false;
-};
 
 export const getAuth = () => {
   const storage = localStorage.getItem("auth");
   const auth: Authed | null = storage != null ? JSON.parse(storage) : null;
-  if (!auth) return false;
+  if (!auth) return null;
 
   const user = {
     user: auth.username,
@@ -55,6 +27,10 @@ export const getAuth = () => {
 
   return user;
 };
+export const removeAuth = () => {
+  localStorage.removeItem("auth");
+};
+
 export const decodeToken = (token: any) => {
   const base64Url = token.split(".")[1];
   const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
@@ -63,17 +39,8 @@ export const decodeToken = (token: any) => {
 };
 
 export const login = async (username: string, password: string) => {
-  return await axios.post("http://localhost:8080/auth/authentication", {
+  return await axios.post(apiLogin, {
     username,
     password,
   });
 };
-export const registerUrl = "http://localhost:8080/auth/register";
-export interface userRegister {
-  firstname: string;
-  lastname: string;
-  username: string;
-  password: string;
-  token:string,
-  role: string;
-}

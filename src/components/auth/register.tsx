@@ -1,9 +1,11 @@
 import { Input, Button, Form, message } from "antd";
 import { useState } from "react";
-import { createSession, registerUrl, userRegister } from "../../util/auth";
+import { createSession } from "../../util/auth";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { routes } from "../../routes/routes";
+import { UserRegister } from "../../type/authType";
+import { apiRegister } from "../../api/backendRoute";
 
 const Register = () => {
   const [password, setPassword] = useState<string>("");
@@ -14,7 +16,7 @@ const Register = () => {
     }
   };
   const nav = useNavigate();
-  const register = async (value: userRegister) => {
+  const register = async (value: UserRegister) => {
     const newUser = {
       firstname: value.firstname,
       lastname: value.lastname,
@@ -25,7 +27,7 @@ const Register = () => {
 
     setLoading(true);
     await axios
-      .post(registerUrl, newUser)
+      .post(apiRegister, newUser)
       .then((res) => {
         createSession(res.data);
         message.success("Login Success");
