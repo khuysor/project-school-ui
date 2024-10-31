@@ -25,7 +25,7 @@ export const sidebar = [
   {
     path: routes.category,
     key: routes.category,
-    name: "Class",
+    name: "Subject",
     icon: <FolderOpenOutlined />,
   },
   {

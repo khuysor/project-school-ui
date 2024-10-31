@@ -3,21 +3,22 @@ import { createSession, login } from "../../util/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { routes } from "../../routes/routes";
+import { useForm } from "antd/es/form/Form";
 const Login = () => {
   const nav = useNavigate();
   message.useMessage();
   const [loading, setLoading] = useState<boolean>(false);
-  const [form] = Form.useForm();
+  const [form] = useForm();
   const auth = async (values: { username: string; password: string }) => {
     setLoading(true);
     await login(values.username, values.password)
       .then((res: any) => {
-        // createSession(res.data);
+        createSession(res.data);
         console.log(res.data);
         message.success("Login Success");
         nav("/");
       })
-      .catch((e) => {
+      .catch(() => {
         message.error("Invalid User name or Password");
         setLoading(false);
       });
